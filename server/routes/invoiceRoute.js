@@ -162,8 +162,8 @@ router.get('/invoices/:id/pdf', async (req, res) => {
 
         const invoiceHTML = template(invoicepdf);
         const browser = await puppeteer.launch({
-            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-            headless: true,
+            headless: true,  
+            args: ['--no-sandbox', '--disable-setuid-sandbox']  
         });
         const page = await browser.newPage();
         await page.setContent(invoiceHTML);
