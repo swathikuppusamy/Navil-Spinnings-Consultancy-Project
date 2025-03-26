@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       animation: {
-        'scale-in': 'scaleIn 3.5s ease-in-out forwards',
-        'fade-out': 'fadeOut 3.5s ease-in-out forwards',
-        'letter-spacing': 'letterSpacing 3.5s ease-in-out forwards',
-        'loading-bounce': 'loadingBounce 3.5s ease-in-out infinite',
+        'scale-in': 'scaleIn 4s ease-in-out forwards',
+        'fade-out': 'fadeOut 4s ease-in-out forwards',
+        'letter-spacing': 'letterSpacing 4s ease-in-out forwards',
+        'loading-bounce': 'loadingBounce 4s ease-in-out infinite',
       },
       keyframes: {
         scaleIn: {
