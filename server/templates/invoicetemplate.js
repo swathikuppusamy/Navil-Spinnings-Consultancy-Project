@@ -2,140 +2,305 @@ module.exports = (invoice) => `
 <!DOCTYPE html>
 <html>
 <head>
-    <title>${invoice.customername}</title>
+    <title>Tax Invoice - ${invoice.customername}</title>
     <style>
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            line-height: 1.5;
-            font-size: 14px;
+            color: #000;
+            line-height: 1.3;
+            font-size: 12px;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .header h1 {
-            font-family: 'Georgia', serif;
-            font-size: 28px;
-            margin: 0;
-        }
-        .header p {
-            font-size: 12px;
-            margin: 5px 0;
-        }
-        .invoice-details {
-            margin-bottom: 20px;
-        }
-        .invoice-details p {
-            margin: 5px 0;
-        }
-        .billed-to {
-            margin-bottom: 20px;
-        }
-        .billed-to strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-        table {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #000;
         }
-        table thead th {
-            border-bottom: 2px solid #ccc;
-            padding: 10px;
-            text-align: left;
+        .document-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            position: relative;
         }
-        table tbody td {
-            border-bottom: 1px solid #eee;
-            padding: 10px;
+        .original-copy {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 12px;
         }
-        .totals {
-            text-align: right;
+        .header-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            border-bottom: 1px solid #000;
         }
-        .totals p {
-            margin: 5px 0;
+        .company-info {
+            padding: 5px;
+            border-right: 2px solid #000;
         }
-        .totals .grand-total {
+        .company-info h1 {
             font-size: 16px;
+            margin: 0 0 5px 0;
             font-weight: bold;
         }
-        .footer {
-            margin-top: 40px;
-            text-align: center;
+        .company-info p {
+            margin: 2px 0;
             font-size: 12px;
-            color: #555;
         }
-        .footer .signature {
-            margin-top: 40px;
+        .invoice-meta {
+            padding: 5px;
+        }
+        .invoice-meta-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .invoice-meta-table td {
+            padding: 2px;
+            border: 1px solid #000;
+        }
+        .invoice-meta-table .shipped-to {
+            height: 60px;
+            vertical-align: top;
+        }
+        .billed-to {
+            padding: 5px;
+            border-bottom: 1px solid #000;
+        }
+        .billed-to-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .customer-name {
+            font-weight: bold;
+            font-size: 13px;
+            margin: 3px 0;
+        }
+        .customer-address {
+            margin: 2px 0;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .items-table th, .items-table td {
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: left;
+            font-size: 12px;
+        }
+        .items-table th {
+            background-color: #fff;
+            font-weight: normal;
+        }
+        .gst-summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .gst-summary td {
+            border: 1px solid #000;
+            padding: 4px;
+            font-size: 12px;
+        }
+        .total-row {
+            border-top: 1px solid #000;
+            margin-top: 5px;
+        }
+        .total-row td {
+            font-weight: bold;
+        }
+        .amount-in-words {
+            border: 1px solid #000;
+            padding: 5px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 20px;
+            border-top: 1px solid #000;
+        }
+        .declarations {
+            padding: 5px;
+            font-size: 11px;
+        }
+        .declarations ul {
+            list-style-type: decimal;
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .bank-details {
+            border-left: 1px solid #000;
+            padding: 5px;
+            font-size: 11px;
+        }
+        .signatures {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            text-align: center;
+            font-size: 11px;
+        }
+        .bold-text {
             font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Navil Spinnings</h1>
-            <p>53, Thekkalur, Periyakatuthottam, Arachalur, Erode - 638101</p>
+        <div class="document-title">
+            TAX INVOICE
+            <span class="original-copy">Original for Recipient</span>
         </div>
-
-        <div class="invoice-details">
-            <p><strong>Invoice No:</strong> ${invoice._id}</p>
-            <p><strong>Date:</strong> ${new Date(invoice.date).toLocaleDateString()}</p>
+        
+        <div class="header-grid">
+            <div class="company-info">
+                <h1>NAVIL SPINNINGS</h1>
+                <p>53 Thekkalur, Periyakattu Thottam</p>
+                <p>Arachalur- 638101</p>
+                <p>GSTIN/UIN: 33BRVPS5283A1ZG</p>
+                <p>Contact: 9361102121</p>
+                <p>E-Mail: navilspinnings@gmail.com</p>
+                <p>MSME: ${invoice.msme || ''}</p>
+            </div>
+            <div class="invoice-meta">
+                <table class="invoice-meta-table">
+                    <tr>
+                        <td>Invoice No<br>${invoice._id}</td>
+                        <td>Date<br>${new Date(invoice.date).toLocaleDateString()}</td>
+                    </tr>
+                    <tr>
+                        <td>Terms of Payment<br>CREDIT BILL</td>
+                        <td>Other Reference(s)</td>
+                    </tr>
+                    <tr>
+                        <td>Buyer's Order No<br>${invoice.buyerOrderNo || ''}</td>
+                        <td>Dated</td>
+                    </tr>
+                    <tr>
+                        <td>Despatched Through<br>${invoice.transporterId || ''}</td>
+                        <td>Destination<br>${invoice.customeraddress ? invoice.customeraddress.split(',').pop().trim() : 'ARACHALUR'}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="shipped-to">Shipped To:<br>${invoice.customername}<br>${invoice.customeraddress || ''}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="billed-to">
-            <strong>Billed To:</strong>
-            <p>${invoice.customername}</p>
-            <p>${invoice.customeraddress || ''}</p>
-            <p>${invoice.customerphone || ''}</p>
+            <div class="billed-to-title">Billed To:</div>
+            <p class="customer-name">${invoice.customername}</p>
+            <p class="customer-address">${invoice.customeraddress || ''}</p>
+            <p>GSTIN/UIN: ${invoice.customerGstin || ''}</p>
+            <p>State Code: ${invoice.stateCode || ''}</p>
+            <p>Place of Supply: ${invoice.placeOfSupply || 'TamilNadu'}</p>
         </div>
 
-        <table>
+        <table class="items-table">
             <thead>
                 <tr>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Total</th>
+                    <th>S.No</th>
+                    <th>Description</th>
+                    <th>HSN Code</th>
+                    <th>No of Bags<br>/Chippam</th>
+                    <th>Quantity<br>Kgs</th>
+                    <th>Rate</th>
+                    <th>GST%</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
-                ${invoice.items.map(item => `
+                ${invoice.items.map((item, index) => `
                 <tr>
+                    <td>${index + 1}</td>
                     <td>${item.productname}</td>
-                    <td>${item.quantity}</td>
+                    <td>${item.hsnCode || ''}</td>
+                    <td>${item.bags || ''}</td>
+                    <td>${item.quantity} KGS</td>
                     <td>${item.unitprice.toFixed(2)}</td>
+                    <td>${item.gstPercentage || 5}</td>
                     <td>${item.totalprice.toFixed(2)}</td>
                 </tr>
                 `).join('')}
             </tbody>
         </table>
 
-        <div class="totals">
-            <p><strong>Subtotal:</strong> ${invoice.subtotal.toFixed(2)}</p>
-            <p><strong>Tax:</strong> ${invoice.totalgst ? invoice.totalgst.toFixed(2) : '0.00'}</p>
-            <p><strong>Discount:</strong> ${invoice.totaldiscount ? invoice.totaldiscount.toFixed(2) : '0.00'}</p>
-            <p class="grand-total"><strong>Total:</strong> ${invoice.grandtotal.toFixed(2)}</p>
+        <table class="gst-summary">
+            <tr>
+                <td>Taxable Value<br><span class="bold-text">${invoice.subtotal.toFixed(2)}</span></td>
+                <td>
+                    CGST<br>
+                    %: 2.5<br>
+                    Amount: ${(invoice.totalgst / 2).toFixed(2)}
+                </td>
+                <td>
+                    SGST<br>
+                    %: 2.5<br>
+                    Amount: ${(invoice.totalgst / 2).toFixed(2)}
+                </td>
+                <td>
+                    Gross Amount<br>
+                    SGST<br>
+                    CGST
+                </td>
+                <td>
+                    <span class="bold-text">${invoice.subtotal.toFixed(2)}</span><br>
+                    ${(invoice.totalgst / 2).toFixed(2)}<br>
+                    ${(invoice.totalgst / 2).toFixed(2)}
+                </td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">Total</td>
+                <td class="bold-text">${invoice.grandtotal.toFixed(2)}</td>
+            </tr>
+        </table>
+
+        <div class="amount-in-words">
+            Amount Chargeable (in words)<br>
+            <strong>${invoice.amountInWords || 'Amount in words'}</strong>
+            <span style="float: right;">E&OE</span>
         </div>
 
         <div class="footer">
-            <p>Thank you for your business!</p>
-            <div class="signature">
-                <p>Authorized Signature</p>
-                <p>${invoice.sellername || ''}</p>
+            <div class="declarations">
+                <strong>Declaration</strong>
+                <ul>
+                    <li>We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.</li>
+                    <li>If payment is not received within 10days 24% interest will be charged.</li>
+                    <li>We are not responsible for any loss or damage caused during transit.</li>
+                </ul>
             </div>
+            <div class="bank-details">
+                <strong>Company's Bank Details</strong>
+                <p>Bank Name: CANARA BANK</p>
+                <p>A/C No: 1200000207964</p>
+                <p>Branch & IFSC Code: ARACHALUR BRANCH & CNRB0001200</p>
+            </div>
+        </div>
+
+        <div class="signatures">
+            <div>Customer's Seal and Signature</div>
+            <div>Prepared By</div>
+            <div>Verified By</div>
+            <div>For NAVIL SPINNINGS<br>Authorised Signatory</div>
         </div>
     </div>
 </body>
 </html>
-
 `;
