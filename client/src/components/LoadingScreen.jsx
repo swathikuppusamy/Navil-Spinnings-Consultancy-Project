@@ -1,34 +1,38 @@
-import React from 'react';
-import { Award } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
-const LoadingScreen = () => {
+function LoadingScreen() {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShow(false);
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!show) return null;
+
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-600 flex items-center justify-center font-poppins overflow-hidden">
-      <div className="relative text-center">
-        {/* Animated rings */}
-        <div className="absolute inset-0 animate-pulse-ring rounded-full border-4 border-yellow-400/30"></div>
-        <div className="absolute inset-0 animate-pulse-ring delay-300 rounded-full border-4 border-yellow-400/20"></div>
+    <div className="min-h-screen bg-black flex items-center justify-center overflow-hidden">
+      <div className="relative">
+        {/* Background glow effect */}
+        <div className="absolute inset-0 bg-brand-primary/20 filter blur-3xl scale-150 animate-pulse"></div>
         
-        {/* Main content */}
-        <div className="relative z-10 transform animate-float">
-          <Award className="w-24 h-24 text-yellow-400 mb-6 animate-spin-slow mx-auto" />
-          <h1 className="text-6xl font-extrabold text-white tracking-wider mb-4 drop-shadow-lg">
-            Navil Spinnings
-          </h1>
-          <p className="text-xl text-white/90 font-light tracking-wide">
-            Crafting Excellence
-          </p>
-          
-          {/* Loading indicator */}
-          <div className="mt-8 flex items-center justify-center gap-2">
-            <div className="w-2 h-2 bg-white/80 rounded-full animate-bounce"></div>
-            <div className="w-2 h-2 bg-white/80 rounded-full animate-bounce delay-100"></div>
-            <div className="w-2 h-2 bg-white/80 rounded-full animate-bounce delay-200"></div>
+        {/* Main text */}
+        <h1 className="text-brand-primary text-7xl font-bold tracking-wider relative animate-scale-in drop-shadow-lg">
+          NAVIL SPINNINGS
+        </h1>
+
+        {/* Loading line */}
+        <div className="absolute -bottom-8 left-0 right-0 flex justify-center">
+          <div className="h-[2px] w-32 bg-brand-secondary/50 relative overflow-hidden rounded-full">
+            <div className="h-full w-8 bg-brand-primary absolute animate-loading-bounce rounded-full"></div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default LoadingScreen;
