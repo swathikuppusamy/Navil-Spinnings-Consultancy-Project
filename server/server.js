@@ -7,7 +7,9 @@ const connectdb=require('./config/db.js')
 const route=require('./routes/invoiceRoute')
 const proroute=require('./routes/productRoute.js')
 const port=process.env.PORT||7777;
-app.use(cors())
+app.use(cors({
+    origin: "https://navil-spinnings.netlify.app"
+  }));
 app.use(express.json())
 
 app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')));
