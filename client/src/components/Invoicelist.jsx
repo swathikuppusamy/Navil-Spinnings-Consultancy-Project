@@ -42,8 +42,10 @@ const Invoicelist = () => {
   const handlePreview = async (id) => {
     try {
       const { data } = await genpdf(id);
-      const pdfUrl = `${import.meta.env.VITE_API || 'http://localhost:5000'}${data.pdfPath}`;
-      
+      const pdfUrl = `${import.meta.env.VITE_API || "http://localhost:5000"}${
+        data.pdfPath
+      }`;
+
       setPdfPreviewUrl(pdfUrl);
       setShowPreview(true);
     } catch (error) {
@@ -59,14 +61,17 @@ const Invoicelist = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
-      
+
       <div className="flex-1 p-8">
         {/* Add Invoice Button */}
-        <Link to="/form">
-          <div className="flex items-center justify-center w-[12vw] py-3 px-5 rounded-lg bg-gradient-to-r from-blue-800 to-indigo-900 text-white font-semibold shadow-md hover:shadow-lg transform transition-all duration-300 hover:scale-105">
+        <div className="flex items-center justify-center w-[12vw] py-3 px-3 rounded-lg bg-gradient-to-r from-blue-800 to-indigo-900 text-white font-semibold shadow-md hover:shadow-lg transform transition-all duration-300 hover:scale-105">
+          <Link
+            to="/form"
+            className="w-full h-full flex justify-center items-center"
+          >
             + Add Invoice
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         {/* Invoice Table */}
         <div className="bg-white shadow-lg rounded-lg mt-6 overflow-hidden">
@@ -82,11 +87,26 @@ const Invoicelist = () => {
             </thead>
             <tbody>
               {invoicedata.map((value, index) => (
-                <tr key={value._id} className="border-b hover:bg-gray-50 transition-all duration-200">
+                <tr
+                  key={value._id}
+                  className="border-b hover:bg-gray-50 transition-all duration-200"
+                >
                   <td className="p-4">{index + 1}</td>
-                  <td className="p-4">{value.date}</td>
-                  <td className="p-4 font-medium text-gray-800">{value.customername}</td>
-                  <td className="p-4 text-green-600 font-semibold">₹{value.grandtotal.toFixed(2)}</td>
+                  <td className="p-4">
+                    {value.date
+                      ? new Date(value.date).toLocaleDateString("en-IN", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })
+                      : "Invalid Date"}
+                  </td>
+                  <td className="p-4 font-medium text-gray-800">
+                    {value.customername}
+                  </td>
+                  <td className="p-4 text-green-600 font-semibold">
+                    ₹{value.grandtotal.toFixed(2)}
+                  </td>
                   <td className="p-4 flex gap-3">
                     <button
                       onClick={() => handleEdit(value._id)}
@@ -117,7 +137,6 @@ const Invoicelist = () => {
         {showPreview && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg shadow-2xl w-[80%] h-[90%] relative p-6 flex flex-col">
-              
               {/* Close Button */}
               <button
                 onClick={() => setShowPreview(false)}
@@ -125,7 +144,7 @@ const Invoicelist = () => {
               >
                 ✕
               </button>
-              
+
               {/* PDF Preview */}
               <iframe
                 src={pdfPreviewUrl}
