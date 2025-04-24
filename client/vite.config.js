@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000', // Your Express server URL
+        target: 'https://navil-spinnings-consultancy-project.onrender.com', // Your Express server URL
         changeOrigin: true,
         secure: false
       }
