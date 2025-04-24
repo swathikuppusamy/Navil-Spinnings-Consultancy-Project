@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  MODE = "production"
+  VITE_PRESERVE_TAILWIND = "true"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

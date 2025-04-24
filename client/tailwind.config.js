@@ -1,10 +1,24 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
-    './public/index.html'
+    './public/**/*.html',
+    './src/**/*.{css,scss}',
+  ],
+  safelist: [
+    'active',
+    // Add other important classes that might be getting purged
+    'bg-brand-primary',
+    'bg-brand-secondary',
+    'bg-brand-light',
+    'text-brand-primary',
+    'text-brand-secondary',
+    'text-brand-light',
+    'animate-scale-in',
+    'animate-fade-out',
+    'animate-letter-spacing',
+    'animate-loading-bounce'
   ],
   theme: {
     extend: {
