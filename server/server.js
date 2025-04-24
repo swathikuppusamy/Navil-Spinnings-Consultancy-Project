@@ -8,7 +8,7 @@ const route=require('./routes/invoiceRoute')
 const proroute=require('./routes/productRoute.js')
 const port=process.env.PORT||7777;
 app.use(cors({
-    origin: "https://navil-spinnings.netlify.app"
+    origin: ["https://navil-spinnings.netlify.app","http://localhost:5173"]
   }));
 app.use(express.json())
 
