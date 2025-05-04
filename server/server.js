@@ -8,7 +8,12 @@ const route=require('./routes/invoiceRoute')
 const proroute=require('./routes/productRoute.js')
 const port=process.env.PORT||7777;
 app.use(cors({
-    origin: ["https://navil-spinnings-dev.netlify.app","http://localhost:5173"]
+    origin: [
+      'https://navil-spinnings-dev.netlify.app',
+      'http://localhost:5173', // For local development
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
 app.use(express.json())
 
