@@ -42,7 +42,7 @@ const Invoicelist = () => {
   const handlePreview = async (id) => {
     try {
       const { data } = await genpdf(id);
-      const pdfUrl = `${"https://navil-spinnings-consultancy-project.onrender.com" || "http://localhost:5000"}${
+      const pdfUrl = `${"https://navil-spinnings-consultancy-project.onrender.com"}${
         data.pdfPath
       }`;
 
