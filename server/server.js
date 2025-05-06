@@ -10,6 +10,7 @@ const port=process.env.PORT||7777;
 app.use(cors({
     origin: [
       'https://navil-spinnings-dev.netlify.app',
+      'https://navil-spinnings.netlify.app',
       'http://localhost:5173', // For local development
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
