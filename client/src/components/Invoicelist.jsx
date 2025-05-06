@@ -42,9 +42,7 @@ const Invoicelist = () => {
   const handlePreview = async (id) => {
     try {
       const { data } = await genpdf(id);
-      const pdfUrl = `${"https://navil-spinnings-consultancy-project.onrender.com"}${
-        data.pdfPath
-      }`;
+      const pdfUrl = `${(import.meta.env.VITE_API || "http://localhost:5000").replace(/\/api$/, "")}${data.pdfPath}`;
 
       setPdfPreviewUrl(pdfUrl);
       setShowPreview(true);
