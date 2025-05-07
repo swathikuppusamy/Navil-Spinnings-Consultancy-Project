@@ -6,6 +6,7 @@ import Stocks from "./components/Stocks";
 import Invoiceform from "./components/Invoiceform";
 import ProductManagement from "./components/Productsform";
 import LoadingScreen from "./components/LoadingScreen";
+import LetterPad from "./components/LetterPad";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +29,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/list" element={<Invoicelist/>}/>
+          <Route path="/letterpad"element={<LetterPad/>}/>
           <Route path="/stock" element={<Stocks/>}/>
           <Route path='/form' element={<Invoiceform/>}/>
           <Route path="/form/:id" element={<Invoiceform/>} />

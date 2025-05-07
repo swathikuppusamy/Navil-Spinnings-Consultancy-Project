@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home as HomeIcon, FileText, Package, BarChart2 } from 'lucide-react';
+import { Home as HomeIcon, FileText, Package, BarChart2, Mail } from 'lucide-react';
 
 const Sidebar = () => {
     const navlinks = [
         { path: '/', title: 'Dashboard', icon: HomeIcon },
         { path: '/list', title: 'Sales Invoice', icon: FileText },
         { path: '/products', title: 'Products', icon: Package },
+        { path: '/letterpad', title: 'Letter Pad', icon: Mail },
         { path: '/stock', title: 'Stocks', icon: BarChart2 }
     ];
 

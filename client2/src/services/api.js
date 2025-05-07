@@ -2,7 +2,7 @@ import axiosInstance from '../utils/config.js'
 
 // Invoice API functions
 const getinvoice = () => axiosInstance.get('/invoices')
-const getinvoicebyid = (id) => axiosInstance.get(`/invoices/${id}`) // Fixed: added id parameter
+const getinvoicebyid = (id) => axiosInstance.get(`/invoices/${id}`)
 const addinvoice = (invoicedata) => axiosInstance.post('/invoices', invoicedata)
 const editinvoice = (id, editedinvoice) => axiosInstance.put(`/invoices/${id}`, editedinvoice)
 const deletedinvoice = (id) => axiosInstance.delete(`/invoices/${id}`)
@@ -14,10 +14,13 @@ const getProductById = (id) => axiosInstance.get(`/products/${id}`)
 const addProduct = (productData) => axiosInstance.post('/products', productData)
 const updateProduct = (id, productData) => axiosInstance.put(`/products/${id}`, productData)
 const deleteProduct = (id) => axiosInstance.delete(`/products/${id}`)
+const getProductStockHistory = (id) => axiosInstance.get(`/products/${id}/history`)
+const adjustProductStock = (id, adjustmentData) => axiosInstance.post(`/products/${id}/stock`, adjustmentData)
 
-export  { 
+export  {
   // Invoice exports
   getinvoice, addinvoice, editinvoice, deletedinvoice, getinvoicebyid, genpdf,
   // Product exports
-  getProducts, getProductById, addProduct, updateProduct, deleteProduct 
+  getProducts, getProductById, addProduct, updateProduct, deleteProduct, 
+  getProductStockHistory, adjustProductStock
 };
