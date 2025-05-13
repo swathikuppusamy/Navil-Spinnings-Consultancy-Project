@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Save, Printer, Download, Send, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 const LetterPad = () => {
     const [letterContent, setLetterContent] = useState('');
@@ -73,95 +74,101 @@ const LetterPad = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen">
-            <div className="max-w-4xl mx-auto">
-                {/* Toolbar - will be hidden during print */}
-                <div className="bg-gray-800 p-4 flex flex-wrap gap-3 rounded-t-lg no-print">
-                    <button 
-                        onClick={handleBack}
-                        className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Back
-                    </button>
-                    <button 
-                        onClick={handleSave}
-                        className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
-                    >
-                        <Save className="w-4 h-4" />
-                        Save
-                    </button>
-                    <button 
-                        onClick={handlePrint}
-                        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                    >
-                        <Printer className="w-4 h-4" />
-                        Print
-                    </button>
-                    <button 
-                        onClick={handleDownload}
-                        className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-                    >
-                        <Download className="w-4 h-4" />
-                        Download
-                    </button>
-                    <button 
-                        className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                    >
-                        <Send className="w-4 h-4" />
-                        Email
-                    </button>
-                </div>
+        <div className="flex min-h-screen bg-gray-50">
+            {/* Sidebar */}
+            <Sidebar />
+            
+            {/* Main Content */}
+            <div className="flex-1 p-6">
+                <div className="max-w-4xl mx-auto">
+                    {/* Toolbar - will be hidden during print */}
+                    <div className="bg-gray-800 p-4 flex flex-wrap gap-3 rounded-t-lg no-print">
+                        <button 
+                            onClick={handleBack}
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                            Back
+                        </button>
+                        <button 
+                            onClick={handleSave}
+                            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                        >
+                            <Save className="w-4 h-4" />
+                            Save
+                        </button>
+                        <button 
+                            onClick={handlePrint}
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                        >
+                            <Printer className="w-4 h-4" />
+                            Print
+                        </button>
+                        <button 
+                            onClick={handleDownload}
+                            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                        >
+                            <Download className="w-4 h-4" />
+                            Download
+                        </button>
+                        <button 
+                            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                        >
+                            <Send className="w-4 h-4" />
+                            Email
+                        </button>
+                    </div>
 
-                {/* Letterpad with Header */}
-                <div 
-                    ref={letterpadRef} 
-                    className="bg-white shadow-lg border border-gray-200"
-                >
-                    {/* Header */}
-                    <div className="letterhead">
-                        {/* Top Border */}
-                        <div className="h-6 bg-gradient-to-r from-indigo-600 to-blue-600 top-border"></div>
-                        
-                        {/* Logo and Company Details */}
-                        <div className="p-6 flex flex-col items-center text-center border-b-2 border-gray-300 company-info">
-                            <div className="flex items-center gap-3">
-                                <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl company-logo">
-                                    NS
+                    {/* Letterpad with Header */}
+                    <div 
+                        ref={letterpadRef} 
+                        className="bg-white shadow-lg border border-gray-200"
+                    >
+                        {/* Header */}
+                        <div className="letterhead">
+                            {/* Top Border */}
+                            <div className="h-6 bg-gradient-to-r from-indigo-600 to-blue-600 top-border"></div>
+                            
+                            {/* Logo and Company Details */}
+                            <div className="p-6 flex flex-col items-center text-center border-b-2 border-gray-300 company-info">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl company-logo">
+                                        NS
+                                    </div>
+                                    <h1 className="text-3xl font-bold text-indigo-800 company-name">NAVIL SPINNINGS</h1>
                                 </div>
-                                <h1 className="text-3xl font-bold text-indigo-800 company-name">NAVIL SPINNINGS</h1>
-                            </div>
-                            <p className="text-lg font-medium text-gray-600 mt-2 company-tagline">Textile Manufacturing Excellence</p>
-                            <div className="mt-3 text-gray-500 company-details">
-                                <p>53, Thekkalur, Periyakatuthottam, Arachalur, Erode - 638101</p>
-                                <p>Phone: +91 90477 94776 | Email: navilspinnings@gmail.com</p>
-                                <p>GST: 33BRVPS5283A1ZG</p>
+                                <p className="text-lg font-medium text-gray-600 mt-2 company-tagline">Textile Manufacturing Excellence</p>
+                                <div className="mt-3 text-gray-500 company-details">
+                                    <p>53, Thekkalur, Periyakatuthottam, Arachalur, Erode - 638101</p>
+                                    <p>Phone: +91 90477 94776 | Email: navilspinnings@gmail.com</p>
+                                    <p>GST: 33BRVPS5283A1ZG</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Editable Letter Content */}
-                    <div className="p-8 content">
-                        <textarea
-                            value={letterContent}
-                            onChange={(e) => setLetterContent(e.target.value)}
-                            placeholder="Type your letter content here..."
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md min-h-[500px] no-print"
-                            rows={20}
-                        />
-                        {/* This div will show in print but not in the UI */}
-                        <div className="hidden print:block">{letterContent.split('\n').map((line, i) => <p key={i}>{line || <br/>}</p>)}</div>
-                    </div>
+                        {/* Editable Letter Content */}
+                        <div className="p-8 content">
+                            <textarea
+                                value={letterContent}
+                                onChange={(e) => setLetterContent(e.target.value)}
+                                placeholder="Type your letter content here..."
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md min-h-[500px] no-print"
+                                rows={20}
+                            />
+                            {/* This div will show in print but not in the UI */}
+                            <div className="hidden print:block">{letterContent.split('\n').map((line, i) => <p key={i}>{line || <br/>}</p>)}</div>
+                        </div>
 
-                    {/* Footer */}
-                    <div className="px-8 pb-8 footer">
-                        <p className="text-gray-700">For Navil Spinnings</p>
-                        <div className="h-16 signature-space"></div> {/* Space for signature */}
-                        <p className="font-semibold">Authorized Signatory</p>
-                    </div>
+                        {/* Footer */}
+                        <div className="px-8 pb-8 footer">
+                            <p className="text-gray-700">For Navil Spinnings</p>
+                            <div className="h-16 signature-space"></div> {/* Space for signature */}
+                            <p className="font-semibold">Authorized Signatory</p>
+                        </div>
 
-                    {/* Bottom Border */}
-                    <div className="h-6 bg-gradient-to-r from-indigo-600 to-blue-600 bottom-border"></div>
+                        {/* Bottom Border */}
+                        <div className="h-6 bg-gradient-to-r from-indigo-600 to-blue-600 bottom-border"></div>
+                    </div>
                 </div>
             </div>
 
