@@ -39,21 +39,37 @@ const Invoicelist = () => {
     }
   };
 
+  // const handlePreview = async (id) => {
+  //   try {
+  //     const { data } = await genpdf(id);
+  //     const pdfUrl = `${import.meta.env.API }${
+  //       data.pdfPath
+  //     }`;
+
+  //     setPdfPreviewUrl(pdfUrl);
+  //     setShowPreview(true);
+  //   } catch (error) {
+  //     console.error("Error generating PDF:", error);
+  //     alert("An error occurred while generating the PDF. Please try again.");
+  //   }
+  // };
+
   const handlePreview = async (id) => {
-    try {
-      const { data } = await genpdf(id);
-      const pdfUrl = `${import.meta.env.VITE_API || "http://localhost:5000"}${
-        data.pdfPath
-      }`;
-
-      setPdfPreviewUrl(pdfUrl);
-      setShowPreview(true);
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      alert("An error occurred while generating the PDF. Please try again.");
-    }
-  };
-
+  try {
+    const { data } = await genpdf(id);
+    
+    // Use a hardcoded API URL that matches your .env API value
+    // You should update this if your API URL changes
+    const apiUrl = 'http://localhost:5000';
+    const pdfUrl = `${apiUrl}${data.pdfPath}`;
+    
+    setPdfPreviewUrl(pdfUrl);
+    setShowPreview(true);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    alert("An error occurred while generating the PDF. Please try again.");
+  }
+};
   useEffect(() => {
     fetchinvoice();
   }, []);

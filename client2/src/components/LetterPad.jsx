@@ -111,12 +111,6 @@ const LetterPad = () => {
                             <Download className="w-4 h-4" />
                             Download
                         </button>
-                        <button 
-                            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                        >
-                            <Send className="w-4 h-4" />
-                            Email
-                        </button>
                     </div>
 
                     {/* Letterpad with Header */}
