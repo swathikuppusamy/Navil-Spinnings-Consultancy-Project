@@ -29,7 +29,7 @@ const StockHistoryModal = ({ isOpen, onClose, productId, productName }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/50 bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[80vh] flex flex-col">
         <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-xl font-bold text-gray-800">
@@ -103,12 +103,7 @@ const StockHistoryModal = ({ isOpen, onClose, productId, productName }) => {
         </div>
 
         <div className="p-4 border-t border-gray-200">
-          <button
-            onClick={onClose}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition-all"
-          >
-            Close
-          </button>
+          
         </div>
       </div>
     </div>

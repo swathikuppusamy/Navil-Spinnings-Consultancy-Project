@@ -91,10 +91,10 @@ const Home = () => {
 };
 
 const statistics = [
-  { icon: Package, value: "10K+", label: "Products Manufactured" },
+  { icon: Package, value: "100K+", label: "Products Manufactured" },
   { icon: TrendingUp, value: "98%", label: "Customer Satisfaction" },
-  { icon: Truck, value: "250+", label: "Monthly Deliveries" },
-  { icon: LineChart, value: "₹10L", label: "Annual Revenue" }
+  { icon: Truck, value: "2500+", label: "Monthly Deliveries" },
+  { icon: LineChart, value: "₹150Cr", label: "Annual Revenue" }
 ];
 
 const coreValues = [

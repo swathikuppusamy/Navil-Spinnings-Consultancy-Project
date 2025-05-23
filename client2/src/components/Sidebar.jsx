@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import logo from '../assets/img/logo.png';
 import { Home as HomeIcon, FileText, Package, BarChart2, Mail } from 'lucide-react';
 
 const Sidebar = () => {
@@ -15,7 +16,8 @@ const Sidebar = () => {
         <div className="w-[18vw] bg-gradient-to-b from-gray-900 via-indigo-900 to-blue-900 shadow-xl flex flex-col items-center py-10">
             {/* Logo */}
             <div className="w-24 h-24 bg-gradient-to-br from-white to-indigo-50 rounded-full shadow-lg flex items-center justify-center mb-8 transform transition-transform duration-300 hover:scale-110">
-                <span className="text-3xl font-bold bg-gradient-to-br from-indigo-600 to-blue-600 bg-clip-text text-transparent">NS</span>
+                <img src={logo} alt="Logo" />
+
             </div>
 
             {/* Navigation Links */}
